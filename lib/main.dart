@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/pages/add_todo.dart';
+import 'package:flutter_todo/pages/todo_list.dart';
 
 void main() {
   // 最初に表示するWidget
@@ -18,26 +18,6 @@ class MyTodoApp extends StatelessWidget {
       ),
       // リスト一覧画面を表示
       home: TodoListPage(),
-    );
-  }
-}
-
-// リスト一覧画面用Widget
-class TodoListPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('リスト一覧画面'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return AddTodo();
-          }));
-        },
-        child: Icon(Icons.add),
-      ),
     );
   }
 }

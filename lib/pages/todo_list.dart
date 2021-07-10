@@ -9,30 +9,37 @@ class TodoListPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("リスト一覧"),
       ),
-      body: ListView(
-        children: <Widget>[
-          Card(
-            child: ListTile(
-              title: Text("リスト1"),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text("リスト2"),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text("リスト3"),
-            ),
-          ),
-        ],
-      ),
+      // body: ListView(
+      //   children: <Widget>[
+      //     Card(
+      //       child: ListTile(
+      //         title: Text("リスト1"),
+      //       ),
+      //     ),
+      //     Card(
+      //       child: ListTile(
+      //         title: Text("リスト2"),
+      //       ),
+      //     ),
+      //     Card(
+      //       child: ListTile(
+      //         title: Text("リスト3"),
+      //       ),
+      //     ),
+      //   ],
+      // ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return AddTodoPage();
-          }));
+        onPressed: () async {
+          final newListText = await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return AddTodoPage();
+              },
+            ),
+          );
+          if (newListText != null) {
+            //何らかの処理
+          }
         },
         child: Icon(Icons.add),
       ),

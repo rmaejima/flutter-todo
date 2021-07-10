@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AddTodoPage extends StatelessWidget {
+class AddTodoPage extends StatefulWidget {
+  @override
+  _AddTodoPage createState() => _AddTodoPage();
+}
+
+class _AddTodoPage extends State<AddTodoPage> {
+  //入力されたテキストデータ
+  String _text = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +21,13 @@ class AddTodoPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             //入力フィールド
-            TextField(),
+            TextField(
+              onChanged: (String value) {
+                setState(() {
+                  _text = value;
+                });
+              },
+            ),
             //padding代わりに使ってる
             const SizedBox(
               height: 8,
@@ -35,8 +49,8 @@ class AddTodoPage extends StatelessWidget {
               child: TextButton(
                 // ボタンをクリックした時の処理
                 onPressed: () {
-                  // "pop"で前の画面に戻る
-                  Navigator.of(context).pop();
+                  // "pop"で前の画面に戻る際にデータを渡す
+                  Navigator.of(context).pop(_text);
                 },
                 child: Text('キャンセル'),
               ),

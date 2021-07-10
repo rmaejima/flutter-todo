@@ -1,18 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/pages/add_todo.dart';
 
 void main() {
-  runApp(MyApp());
+  // 最初に表示するWidget
+  runApp(MyTodoApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyTodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      // アプリ名
+      title: 'My Todo App',
       theme: ThemeData(
+        // テーマカラー
         primarySwatch: Colors.blue,
       ),
-      // home: MyHomePage(title: 'Flutter Demo Home Page'),
+      // リスト一覧画面を表示
+      home: TodoListPage(),
+    );
+  }
+}
+
+// リスト一覧画面用Widget
+class TodoListPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('リスト一覧画面'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return AddTodo();
+          }));
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }

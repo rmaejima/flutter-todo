@@ -20,7 +20,10 @@ class _AddTodoPage extends State<AddTodoPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            //入力フィールド
+            // 入力されたテキストを表示
+            Text(_text, style: TextStyle(color: Colors.blue)),
+            const SizedBox(height: 8),
+            // 入力フィールド
             TextField(
               onChanged: (String value) {
                 setState(() {
@@ -28,16 +31,19 @@ class _AddTodoPage extends State<AddTodoPage> {
                 });
               },
             ),
-            //padding代わりに使ってる
+            // padding代わりに使ってる
             const SizedBox(
               height: 8,
             ),
             Container(
-              //横いっぱいに広げる
+              // 横いっぱいに広げる
               width: double.infinity,
+              // リスト追加ボタン
               child: ElevatedButton(
-                // color: Colors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  // 追加する部分
+                  Navigator.of(context).pop(_text);
+                },
                 child: Text('リスト追加', style: TextStyle(color: Colors.white)),
               ),
             ),

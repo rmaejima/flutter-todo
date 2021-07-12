@@ -31,7 +31,9 @@ class _TodoListPageState extends State<TodoListPage> {
                 // 現状の方法だと、リアルタイムでリストが変化することはない
                 // Providerを使う必要がありそう
                 onPressed: () {
-                  todoList.removeRange(index, 1);
+                  setState(() {
+                    todoList.removeRange(index, 1);
+                  });
                 },
               ),
               onTap: () {

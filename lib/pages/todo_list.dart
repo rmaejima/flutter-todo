@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_todo/pages/add_todo.dart';
 
 class TodoListPage extends StatefulWidget {
@@ -17,31 +18,54 @@ class _TodoListPageState extends State<TodoListPage> {
       appBar: AppBar(
         title: Text("リスト一覧"),
       ),
-      body: ListView.builder(
-        itemCount: todoList.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: Icon(Icons.task),
-              title: Text(todoList[index]),
-              // Icon Buttonを使うことで、ボタン化できる
-              trailing: IconButton(
-                icon: const Icon(Icons.delete),
-                color: Colors.red,
-                // 現状の方法だと、リアルタイムでリストが変化することはない
-                // Providerを使う必要がありそう
-                onPressed: () {
-                  setState(() {
-                    todoList.removeRange(index, 1);
-                  });
-                },
+      body: Container(
+        child: ListView.builder(
+          itemCount: todoList.length,
+          itemBuilder: (context, index) {
+            return Slidable(
+              actionExtentRatio: 0.2,
+              actionPane: SlidableScrollActionPane(),
+              // 右にスワイプ
+              actions: [
+                IconSlideAction(
+                  caption: 'share',
+                  color: Colors.indigo,
+                  icon: Icons.share,
+                  onTap: () {},
+                ),
+              ],
+              // 左にスワイプ
+              secondaryActions: [
+                IconSlideAction(
+                  caption: 'Edit',
+                  color: Colors.green,
+                  icon: Icons.edit,
+                  onTap: () {},
+                ),
+                IconSlideAction(
+                  caption: 'Delete',
+                  color: Colors.red,
+                  icon: Icons.delete,
+                  onTap: () {
+                    setState(() {
+                      todoList.removeAt(index);
+                    });
+                  },
+                ),
+              ],
+              child: Container(
+                decoration: BoxDecoration(color: Colors.blue[200]),
+                child: ListTile(
+                  leading: Icon(Icons.task),
+                  title: Text(todoList[index]),
+                  onTap: () {
+                    print("OnTap");
+                  },
+                ),
               ),
-              onTap: () {
-                print("OnTap");
-              },
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

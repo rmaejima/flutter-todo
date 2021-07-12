@@ -57,7 +57,7 @@ class _AddTodoPage extends State<AddTodoPage> {
                 // ボタンをクリックした時の処理
                 onPressed: () {
                   // "pop"で前の画面に戻る際にデータを渡す
-                  Navigator.of(context).pop(_text);
+                  Navigator.of(context).pop();
                 },
                 child: Text('キャンセル'),
               ),

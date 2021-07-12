@@ -22,7 +22,21 @@ class _TodoListPageState extends State<TodoListPage> {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
+              leading: Icon(Icons.task),
               title: Text(todoList[index]),
+              // Icon Buttonを使うことで、ボタン化できる
+              trailing: IconButton(
+                icon: const Icon(Icons.delete),
+                color: Colors.red,
+                // 現状の方法だと、リアルタイムでリストが変化することはない
+                // Providerを使う必要がありそう
+                onPressed: () {
+                  todoList.removeRange(index, 1);
+                },
+              ),
+              onTap: () {
+                print("OnTap");
+              },
             ),
           );
         },

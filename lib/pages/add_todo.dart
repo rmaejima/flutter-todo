@@ -42,6 +42,7 @@ class _AddTodoPage extends State<AddTodoPage> {
               child: ElevatedButton(
                 onPressed: () {
                   // 追加する部分
+                  // textを返す
                   Navigator.of(context).pop(_text);
                 },
                 child: Text('リスト追加', style: TextStyle(color: Colors.white)),

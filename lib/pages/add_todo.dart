@@ -7,7 +7,9 @@ class AddTodoPage extends StatefulWidget {
 
 class _AddTodoPage extends State<AddTodoPage> {
   //入力されたテキストデータ
-  String _text = "";
+  String _title = "";
+  // contentをどうやって返せば良いかわからない
+  String _content = "";
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +23,24 @@ class _AddTodoPage extends State<AddTodoPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // 入力されたテキストを表示
-            Text(_text, style: TextStyle(color: Colors.blue)),
+            Text(_title, style: TextStyle(color: Colors.blue)),
             const SizedBox(height: 8),
-            // 入力フィールド
+            // タイトル入力
             TextField(
               onChanged: (String value) {
                 setState(() {
-                  _text = value;
+                  _title = value;
+                });
+              },
+            ),
+            // 入力されたテキストを表示
+            Text(_content, style: TextStyle(color: Colors.blue)),
+            const SizedBox(height: 8),
+            // 内容入力
+            TextField(
+              onChanged: (String value) {
+                setState(() {
+                  _content = value;
                 });
               },
             ),
@@ -43,7 +56,7 @@ class _AddTodoPage extends State<AddTodoPage> {
                 onPressed: () {
                   // 追加する部分
                   // textを返す
-                  Navigator.of(context).pop(_text);
+                  Navigator.of(context).pop(_title);
                 },
                 child: Text('リスト追加', style: TextStyle(color: Colors.white)),
               ),

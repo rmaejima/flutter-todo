@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/models/article_model.dart';
 
 class AddTodoPage extends StatefulWidget {
   @override
@@ -6,10 +7,7 @@ class AddTodoPage extends StatefulWidget {
 }
 
 class _AddTodoPage extends State<AddTodoPage> {
-  //入力されたテキストデータ
-  String _title = "";
-  // contentをどうやって返せば良いかわからない
-  String _content = "";
+  ArticleModel _articleModel = ArticleModel();
 
   @override
   Widget build(BuildContext context) {
@@ -17,54 +15,80 @@ class _AddTodoPage extends State<AddTodoPage> {
       appBar: AppBar(
         title: Text("リスト追加"),
       ),
-      body: Container(
-        padding: EdgeInsets.all(64),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // 入力されたテキストを表示
-            Text(_title, style: TextStyle(color: Colors.blue)),
             const SizedBox(height: 8),
             // タイトル入力
-            TextField(
-              onChanged: (String value) {
-                setState(() {
-                  _title = value;
-                });
-              },
+            Container(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "Title",
+                  hintText: "タイトルを入力してください",
+                ),
+                onChanged: (String value) {
+                  setState(() {
+                    _articleModel.title = value;
+                  });
+                },
+              ),
             ),
-            // 入力されたテキストを表示
-            Text(_content, style: TextStyle(color: Colors.blue)),
             const SizedBox(height: 8),
-            // 内容入力
-            TextField(
-              onChanged: (String value) {
-                setState(() {
-                  _content = value;
-                });
-              },
+            // サブタイトル入力
+            Container(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "SubTitle",
+                  hintText: "サブタイトルを入力してください",
+                ),
+                onChanged: (String value) {
+                  setState(() {
+                    _articleModel.subtitle = value;
+                  });
+                },
+              ),
+            ),
+            // padding代わりに使ってる
+            const SizedBox(height: 8),
+            // コンテンツ入力
+            Container(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "Content",
+                  hintText: "詳細を入力してください",
+                ),
+                onChanged: (String value) {
+                  setState(() {
+                    _articleModel.content = value;
+                  });
+                },
+              ),
             ),
             // padding代わりに使ってる
             const SizedBox(
               height: 8,
             ),
             Container(
-              // 横いっぱいに広げる
               width: double.infinity,
+              padding: EdgeInsets.only(left: 15, right: 15),
               // リスト追加ボタン
               child: ElevatedButton(
                 onPressed: () {
                   // 追加する部分
                   // textを返す
-                  Navigator.of(context).pop(_title);
+                  Navigator.of(context).pop(_articleModel);
                 },
                 child: Text('リスト追加', style: TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 8),
             Container(
-              // 横幅いっぱいに広げる
               width: double.infinity,
+              padding: EdgeInsets.only(left: 15, right: 15),
               // キャンセルボタン
               child: TextButton(
                 // ボタンをクリックした時の処理

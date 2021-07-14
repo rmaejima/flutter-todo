@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_todo/models/article_model.dart';
 import 'package:flutter_todo/pages/add_todo.dart';
 
 class TodoListPage extends StatefulWidget {
@@ -10,7 +11,7 @@ class TodoListPage extends StatefulWidget {
 // リスト一覧画面用Widget
 class _TodoListPageState extends State<TodoListPage> {
   //Todoリストのデータ
-  List<String> todoList = [];
+  List<ArticleModel> todoList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,8 @@ class _TodoListPageState extends State<TodoListPage> {
                 decoration: BoxDecoration(color: Colors.blue[200]),
                 child: ListTile(
                   leading: Icon(Icons.task),
-                  title: Text(todoList[index]),
+                  title: Text(todoList[index].title),
+                  subtitle: Text(todoList[index].content),
                   onTap: () {
                     print("OnTap");
                   },

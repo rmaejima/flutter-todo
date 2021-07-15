@@ -66,10 +66,29 @@ class _TodoListPageState extends State<TodoListPage> {
                   caption: 'Delete',
                   color: Colors.red,
                   icon: Icons.delete,
-                  onTap: () {
-                    setState(() {
-                      todoList.removeAt(index);
-                    });
+                  onTap: () async {
+                    await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("警告"),
+                            content: Text("本当に消去してもよろしいですか？"),
+                            actions: [
+                              TextButton(
+                                child: Text("キャンセル"),
+                                onPressed: () => Navigator.of(context).pop(),
+                              ),
+                              TextButton(
+                                  child: Text("OK"),
+                                  onPressed: () {
+                                    setState(() {
+                                      todoList.removeAt(index);
+                                    });
+                                    Navigator.of(context).pop();
+                                  }),
+                            ],
+                          );
+                        });
                   },
                 ),
               ],

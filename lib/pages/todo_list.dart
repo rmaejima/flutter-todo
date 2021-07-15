@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_todo/models/todo_model.dart';
 import 'package:flutter_todo/pages/add_todo.dart';
+import 'package:flutter_todo/pages/edit_todo.dart';
 import 'package:flutter_todo/pages/todo_detail.dart';
 
 class TodoListPage extends StatefulWidget {
@@ -42,7 +43,24 @@ class _TodoListPageState extends State<TodoListPage> {
                   caption: 'Edit',
                   color: Colors.green,
                   icon: Icons.edit,
-                  onTap: () {},
+                  onTap: () async {
+                    final changedTodo = await Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        // 変更したいリストを渡す
+                        return EditTodoPage(todoList[index]);
+                      }),
+                    );
+                    // 戻り値によって変更するかどうかを決める
+                    if (changedTodo != null) {
+                      //キャンセルした場合はnewListTextがnullとなる
+                      setState(() {
+                        // リストの消去と挿入
+                        todoList.removeAt(index);
+                        todoList.insert(index, changedTodo);
+                      });
+                    }
+                  },
                 ),
                 IconSlideAction(
                   caption: 'Delete',
@@ -60,7 +78,7 @@ class _TodoListPageState extends State<TodoListPage> {
                 child: ListTile(
                   leading: Icon(Icons.task),
                   title: Text(todoList[index].title),
-                  subtitle: Text(todoList[index].content),
+                  subtitle: Text(todoList[index].subtitle),
                   onTap: () {
                     Navigator.push(
                       context,

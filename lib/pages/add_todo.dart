@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/models/article_model.dart';
+import 'package:flutter_todo/models/todo_model.dart';
 
 class AddTodoPage extends StatefulWidget {
   @override
@@ -7,7 +7,7 @@ class AddTodoPage extends StatefulWidget {
 }
 
 class _AddTodoPage extends State<AddTodoPage> {
-  ArticleModel _articleModel = ArticleModel();
+  TodoModel _articleModel = TodoModel();
 
   @override
   Widget build(BuildContext context) {

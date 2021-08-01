@@ -83,9 +83,7 @@ class _EditTodoPage extends State<EditTodoPage> {
               // リスト変更ボタン
               child: ElevatedButton(
                 onPressed: () {
-                  if (widget.beforeTodo.title != _todoModel.title) {
-                    Navigator.of(context).pop(_todoModel);
-                  }
+                  Navigator.of(context).pop(_todoModel);
                 },
                 child: Text('リスト変更', style: TextStyle(color: Colors.white)),
               ),

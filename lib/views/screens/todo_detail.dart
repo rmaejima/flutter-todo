@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/models/todo_model.dart';
+import 'package:flutter_todo/models/todo/todo_model.dart';
 
 class TodoDetail extends StatelessWidget {
   // イニシャライザが上手くいかないと引数を受け取れないので注意

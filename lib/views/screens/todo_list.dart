@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_todo/models/todo_model.dart';
+import 'package:flutter_todo/models/todo/todo_model.dart';
 import 'package:flutter_todo/pages/add_todo.dart';
 import 'package:flutter_todo/pages/edit_todo.dart';
 import 'package:flutter_todo/pages/todo_detail.dart';

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/pages/todo_list.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:flutter_todo/views/screens/todo_list.dart';
 
 void main() {
-  // 最初に表示するWidget
-  runApp(MyTodoApp());
+  runApp(ProviderScope(
+    child: MyTodoApp(),
+  ));
 }
 
 class MyTodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // アプリ名
       title: 'My Todo App',
       theme: ThemeData(
-        // テーマカラー
         primarySwatch: Colors.blue,
       ),
-      // リスト一覧画面を表示
       home: TodoListPage(),
     );
   }

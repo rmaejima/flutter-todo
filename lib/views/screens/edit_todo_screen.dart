@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/models/todo_model.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_todo/providers/todo_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EditTodoPage extends StatefulWidget {
-  TodoModel beforeTodo = TodoModel();
-  EditTodoPage(this.beforeTodo);
-
-  @override
-  _EditTodoPage createState() => _EditTodoPage(beforeTodo);
-}
-
-class _EditTodoPage extends State<EditTodoPage> {
-  TodoModel _todoModel = TodoModel();
-  _EditTodoPage(this._todoModel);
-
+class _EditTodoScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    // コントローラの宣言
+    final _todoController = useProvider(todoProvider.notifier);
+    // ステート宣言
+    final _todoState = useProvider(todoProvider.select((value) => value));
     return Scaffold(
       appBar: AppBar(
         title: Text("Todo変更"),
@@ -28,15 +23,13 @@ class _EditTodoPage extends State<EditTodoPage> {
             Container(
               padding: EdgeInsets.only(left: 15, right: 15),
               child: TextFormField(
-                initialValue: _todoModel.title,
+                initialValue: _todoState.title,
                 decoration: InputDecoration(
                   labelText: "Title",
                   hintText: "タイトルを入力してください",
                 ),
                 onChanged: (String value) {
-                  setState(() {
-                    _todoModel.title = value;
-                  });
+                  _todoController.setTitle(value);
                 },
               ),
             ),
@@ -45,15 +38,13 @@ class _EditTodoPage extends State<EditTodoPage> {
             Container(
               padding: EdgeInsets.only(left: 15, right: 15),
               child: TextFormField(
-                initialValue: _todoModel.subtitle,
+                initialValue: _todoState.subTitle,
                 decoration: InputDecoration(
                   labelText: "SubTitle",
                   hintText: "サブタイトルを入力してください",
                 ),
                 onChanged: (String value) {
-                  setState(() {
-                    _todoModel.subtitle = value;
-                  });
+                  _todoController.setSubTitle(value);
                 },
               ),
             ),
@@ -62,15 +53,13 @@ class _EditTodoPage extends State<EditTodoPage> {
             Container(
               padding: EdgeInsets.only(left: 15, right: 15),
               child: TextFormField(
-                initialValue: _todoModel.content,
+                initialValue: _todoState.content,
                 decoration: InputDecoration(
                   labelText: "Content",
                   hintText: "詳細を入力してください",
                 ),
                 onChanged: (String value) {
-                  setState(() {
-                    _todoModel.content = value;
-                  });
+                  _todoController.setContent(value);
                 },
               ),
             ),
@@ -83,7 +72,7 @@ class _EditTodoPage extends State<EditTodoPage> {
               // リスト変更ボタン
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop(_todoModel);
+                  Navigator.of(context).pop(_todoState);
                 },
                 child: Text('リスト変更', style: TextStyle(color: Colors.white)),
               ),
